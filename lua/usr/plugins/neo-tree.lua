@@ -11,7 +11,8 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<leader>e', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    -- toggle: 非表示なら開き、表示中なら閉じる / reveal: 開いた時には現在のファイルを表示する。
+    { '<leader>e', ':Neotree toggle reveal<CR>', desc = 'NeoTree toggle', silent = true },
   },
   config = function ()
     require("neo-tree").setup({
@@ -43,14 +44,14 @@ return {
             highlight = "NeoTreeIndentMarker",
             -- expander config, needed for nesting files
             with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = "",
-            expander_expanded = "",
+            expander_collapsed = "🔓",
+            expander_expanded = "🔒",
             expander_highlight = "NeoTreeExpander",
           },
           icon = {
-            folder_closed = "",
-            folder_open = "",
-            folder_empty = "󰜌",
+            folder_closed = "📁",
+            folder_open = "📂",
+            folder_empty = "🫥",
             provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
               if node.type == "file" or node.type == "terminal" then
                 local success, web_devicons = pcall(require, "nvim-web-devicons")
@@ -79,16 +80,16 @@ return {
           git_status = {
             symbols = {
               -- Change type
-              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "✖",-- this can only be used in the git_status source
-              renamed   = "󰁕",-- this can only be used in the git_status source
+              added     = "📝", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified  = "✍️", -- or "", but this is redundant info if you use git_status_colors on the name
+              deleted   = "🗑️",-- this can only be used in the git_status source
+              renamed   = "🔄",-- this can only be used in the git_status source
               -- Status type
-              untracked = "",
-              ignored   = "",
-              unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
+              untracked = "⏾",
+              ignored   = "🫥",
+              unstaged  = "☑️",
+              staged    = "✅",
+              conflict  = "⛔️",
             }
           },
           -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
@@ -295,6 +296,17 @@ return {
               ["ot"] = { "order_by_type", nowait = false },
             }
           }
+        },
+        event_handlers = {
+          {
+            event = "file_open_requested",
+            handler = function()
+              -- auto close
+              -- vim.cmd("Neotree close")
+              -- OR
+              require("neo-tree.command").execute({ action = "close" })
+            end
+          },
         }
       })
 

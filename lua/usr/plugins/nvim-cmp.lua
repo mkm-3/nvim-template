@@ -39,11 +39,13 @@ return { -- Autocompletion
     'williamboman/mason-lspconfig.nvim',
   },
 
-  opts = function()
-    require('vim-react-snippets').lazy_load()
-  end,
-
   config = function()
+    -- vim-react-snippets の読み込み（存在する場合のみ）
+    local ok, react_snippets = pcall(require, 'vim-react-snippets')
+    if ok and react_snippets.lazy_load then
+      react_snippets.lazy_load()
+    end
+
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
@@ -114,8 +116,18 @@ return { -- Autocompletion
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        -- { name = 'nvim_lsp' },
+        -- { name = 'luasnip' },
+        -- { name = 'path' },
+
+        -- for customized github-copilot plugin
+        { name = 'nvim_lsp', keyword_length = 1 },
+        { name = 'copilot' }, -- これ追加
+        { name = 'luasnip', keyword_length = 2 },
+        { name = 'nvim_lsp_signature_help'},
+        { name = 'nvim_lua', keyword_length = 2},
+        { name = 'calc'},   
+        { name = 'buffer', keyword_length = 2 },
         { name = 'path' },
       },
     }

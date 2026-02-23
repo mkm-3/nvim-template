@@ -71,6 +71,11 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Keep indentation when creating a new line with <CR>
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.paste = false
+
 -- Configure tabs
 vim.opt.expandtab = true
 vim.opt.tabstop = 4

@@ -56,14 +56,17 @@ require('lazy').setup({
   require 'usr.plugins.debug',
   require 'usr.plugins.indent_line',
   require 'usr.plugins.lint',
-  require 'usr.plugins.autopairs', -- Automatically close 
+  require 'usr.plugins.autopairs', -- Automatically close
   require 'usr.plugins.neo-tree', -- Filetree visualization
   require 'usr.plugins.comment', -- Commenting utils
   require 'usr.plugins.todo-comments', -- Highlight todo, notes, etc in comments
-  require 'usr.plugins.confirm',  -- Autoformat
+  require 'usr.plugins.confirm', -- Autoformat
   require 'usr.plugins.vim-sleuth',
   require 'usr.plugins.nvim-cmp', -- Autocompletion
-
+  require 'usr.plugins.copilot',
+  require 'usr.plugins.copilot-cmp',
+  require 'usr.plugins.copilot-chat', -- GitHub Copilot
+  require 'usr.plugins.posession', -- Session management
 
   -- git
   require 'usr.plugins.gitsigns', -- adds gitsigns recommend keymaps
@@ -92,6 +95,7 @@ require('lazy').setup({
     },
   },
 })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

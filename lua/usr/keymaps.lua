@@ -14,7 +14,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -37,9 +37,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>w', '<cmd>:close<CR>') -- Close current window
 vim.keymap.set('n', '<leader>s', '<cmd>:new<CR>') -- Open a new file in vertically split window
 vim.keymap.set('n', '<leader>v', '<cmd>:vertical new<CR>') -- Open a new file in horizontally split window
-vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>') -- Open a new terminal in current window
 vim.keymap.set('n', '<leader>h', '<cmd>:noh<CR>') -- Hide text highlighting
 
 vim.keymap.set('n', '<leader>d', '<cmd>:lua vim.diagnostic.open_float()<CR>') -- Open diagnostics in a floating window
 vim.keymap.set('n', '<leader>dp', '<cmd>:lua vim.diagnostic.goto_prev()<CR>') -- Go to previous diagnostic
 vim.keymap.set('n', '<leader>dn', '<cmd>:lua vim.diagnostic.goto_next()<CR>') -- Go to next diagnostic
+
+
+-- Terminal keymaps
+vim.keymap.set('n', '<leader>t', '<cmd>:split | terminal<CR>i') -- Open a new terminal in split window and enter terminal mode
+vim.keymap.set('n', '<leader>tv', '<cmd>:vsplit | terminal<CR>i') -- Open a new terminal in vertical split window and enter terminal mode
+
+vim.keymap.set('t', '<leader>et', '<C-\\><C-n>') -- [E]xit [T]erminal mode
+vim.keymap.set('t', '<leader>qt', '<C-\\><C-n> :q<CR>') -- Exit terminal mode and close terminal window ([Q]uit [T]erminal mode)
